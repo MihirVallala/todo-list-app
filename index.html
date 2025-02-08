@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <p id="date-time"></p>
+        <div class="input-section">
+            <input type="text" id="taskInput" placeholder="Enter a new task...">
+            <input type="date" id="taskDate">
+            <button class="add-btn" onclick="addTask()">Add Task</button>
+        </div>
+        <div class="filter-section">
+            <button class="filter-btn" onclick="filterTasks('all')">All</button>
+            <button class="filter-btn" onclick="filterTasks('completed')">Completed</button>
+            <button class="filter-btn" onclick="filterTasks('pending')">Pending</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadTasks();
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            Notification.requestPermission();
+        });
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskDate = document.getElementById("taskDate");
+            const taskList = document.getElementById("taskList");
+            
+            if (taskInput.value.trim() === "") return;
+
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${taskInput.value} - ${taskDate.value}</span>
+                            <button class="complete-btn" onclick="completeTask(this)">✔</button>
+                            <button class="delete-btn" onclick="deleteTask(this)">✖</button>`;
+            taskList.appendChild(li);
+            saveTasks();
+            taskInput.value = "";
+            taskDate.value = "";
+            showNotification("Task Added", taskInput.value);
+        }
+
+        function completeTask(button) {
+            button.parentElement.classList.toggle("completed");
+            saveTasks();
+            showNotification("Task Completed", "Well done! Keep going!");
+        }
+
+        function deleteTask(button) {
+            button.parentElement.remove();
+            saveTasks();
+            showNotification("Task Deleted", "You've removed a task.");
+        }
+
+        function filterTasks(filter) {
+            const tasks = document.querySelectorAll("#taskList li");
+            tasks.forEach(task => {
+                if (filter === "all") {
+                    task.style.display = "flex";
+                } else if (filter === "completed" && task.classList.contains("completed")) {
+                    task.style.display = "flex";
+                } else if (filter === "pending" && !task.classList.contains("completed")) {
+                    task.style.display = "flex";
+                } else {
+                    task.style.display = "none";
+                }
+            });
+        }
+
+        function saveTasks() {
+            localStorage.setItem("tasks", document.getElementById("taskList").innerHTML);
+        }
+
+        function loadTasks() {
+            document.getElementById("taskList").innerHTML = localStorage.getItem("tasks") || "";
+        }
+
+        function showNotification(title, message) {
+            if (Notification.permission === "granted") {
+                new Notification(title, { body: message });
+            }
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById("date-time").textContent = now.toLocaleString();
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+        }
+        .input-section {
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .add-btn {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .add-btn:hover {
+            background: #218838;
+        }
+        .filter-section button {
+            background: #007bff;
+            color: white;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 3px;
+            transition: 0.3s;
+        }
+        .filter-section button:hover {
+            background: #0056b3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            align-items: center;
+        }
+        .completed span {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .complete-btn {
+            background: #ffc107;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .complete-btn:hover {
+            background: #e0a800;
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</body>
+</html>
