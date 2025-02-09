@@ -8,7 +8,7 @@ It also gives notifications and this app can also be used and downloaded on your
 [Click here to use the app](https://yourusername.github.io/todo-list-app/)  
 
 ## 📌 Features
-✅ Add new tasks  
+✅ Add new tasks   
 ✅ Set a due date for tasks  
 ✅ Mark tasks as completed  
 ✅ Filter tasks by status (All, Completed, Pending)  
