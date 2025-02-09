@@ -5,7 +5,7 @@ A simple and responsive To-Do List web application that helps users manage their
 It also gives notifications and this app can also be used and downloaded on your mobile. 
  
 ## 🚀 Live Demo 
-[Click here to use the app](https://doomsday234.github.io/todo-list-app/)  
+[Click here to use the app](https://MihirVallala.github.io/todo-list-app/)  
 
 ## 📌 Features
 ✅ Add new tasks   
@@ -25,4 +25,4 @@ It also gives notifications and this app can also be used and downloaded on your
 ## 📂 How to Run Locally
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/todo-list-app.git
+   git clone https://github.com/MihirVallala/todo-list-app.git
