@@ -9,6 +9,7 @@ It also gives notifications and this app can also be used and downloaded on your
 
 ## 📌 Features
 ✅ Add new tasks   
+
 ✅ Set a due date for tasks  
 ✅ Mark tasks as completed  
 ✅ Filter tasks by status (All, Completed, Pending)  
