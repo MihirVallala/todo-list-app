@@ -2,6 +2,7 @@
 # 📝 To-Do List App
 
 A simple and responsive To-Do List web application that helps users manage their daily tasks efficiently.Built using **HTML, CSS, and JavaScript**.
+It also gives  notifications and this app can also be used and downloaded on your mobile.
 
 ## 🚀 Live Demo
 [Click here to use the app](https://yourusername.github.io/todo-list-app/)  
